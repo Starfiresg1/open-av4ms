@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# cron script um die aktuelle av4ms version vom Server zu holen
+#
+wget -q --tries=10 --timeout=20 -O /home/www/static/av4vers.js 'http://av4ms.fahrner.name/js/av4vers.js'
+if [[ $? -eq 0 ]]; then
+	chown www-data:www-data /home/www/static/av4vers.js
+fi
+

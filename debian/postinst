@@ -1,0 +1,65 @@
+#!/bin/sh
+
+# postinst script for av4ms
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+case "$1" in
+
+    configure)
+    adduser www-data dialout
+    update-rc.d av4server defaults
+    update-rc.d webserver defaults
+	# Falls noch keine Passwort-Datei vorhanden, dann erzeugen
+	if [ ! -f /home/www/Password.py ]; then
+	    echo "Erzeuge Passwort-Datei für Webserver"
+	    echo "Bitte /home/www/Password.py ggf. anpassen"
+	    mv -f /home/www/Password.py.dist /home/www/Password.py
+	fi
+	# Logverzeichnis anlegen
+	if [ ! -d /var/log/av4server ]; then
+		mkdir -p /var/log/av4server
+		chown www-data /var/log/av4server
+	fi
+	# Aufzeichnungsverzeichnis anlegen
+	if [ ! -d /home/www/av4logs ]; then
+		mkdir /home/www/av4logs
+	fi
+	# Shutdown für www-data ohne Passwort erlauben
+	if fgrep -q 'www-data ALL= NOPASSWD: /sbin/shutdown' /etc/sudoers; then
+    :
+    else
+		echo 'www-data ALL= NOPASSWD: /sbin/shutdown' >>/etc/sudoers
+    fi
+	# Bytecompile aller Pythonscripte
+	python -m py_compile /home/www/*.py
+	chown -R www-data /home/www
+	# Server starten
+	service av4server start
+	service webserver start
+	;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+	exit 0
+	;;
+
+    *)
+	echo "postinst called with unknown argument \`$1'" >&2
+	exit 1
+	;;
+
+esac
+
+exit 0

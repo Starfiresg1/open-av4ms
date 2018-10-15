@@ -1,0 +1,10 @@
+Package: av4ms
+Version: 1.5-1
+Section: base
+Priority: optional
+Architecture: all
+Depends: python, pyro, python-netifaces, python-serial, python-daemon
+Maintainer: Joachim Fahrner <av4ms@fahrner.name>
+Description: AV4ms Zellen-Inspektor
+ Aufzeichnung und Auswertung von Daten
+ des AV4ms Ladegerätes

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AV4ms Spannungsanzeige</title>
+<link href="/static/style.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="/static/favicon2.png" type="image/x-icon" />
+<script language="JavaScript" src="/static/volts.js"></script>
+</head>
+
+<body>
+	<div id="inner">
+		<h1>AV4ms Spannungsanzeige</h1>
+		<table id="table_inner">
+			<tr>
+				<td>
+					<fieldset id="zelle1">
+						<legend>Zelle 1</legend>
+							<input class="output_large" id="u1e" readonly />
+					</fieldset>
+				</td>
+
+				<td>
+					<fieldset id="zelle2">
+						<legend>Zelle 2</legend>
+							<input class="output_large" id="u2e" readonly />
+					</fieldset>
+				</td>
+				
+				<td>
+					<fieldset id="zelle3">
+						<legend>Zelle 3</legend>
+							<input class="output_large" id="u3e" readonly />
+					</fieldset>
+				</td>
+				
+				<td>
+					<fieldset id="zelle4">
+						<legend>Zelle 4</legend>
+							<input class="output_large" id="u4e" readonly />
+					</fieldset>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+				</td>
+				
+				<td colspan="2">
+					<p id="copy">Aktuelle Zeit: <input id="clock"/></p>
+					<p id="copy">&copy; Joachim & Tim Fahrner 2013</p>
+				</td>
+				
+				<td colspan="1">
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script language="JavaScript">run();</script>
+</body>
+</html>

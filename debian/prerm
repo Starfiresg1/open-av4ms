@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+if [ "$1" = remove ] ; then
+	service webserver stop
+	service av4server stop
+fi
+exit 0

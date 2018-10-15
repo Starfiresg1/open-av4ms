@@ -1,0 +1,122 @@
+#!/usr/bin/env python
+#-*-coding: utf-8 -*-
+
+import sys, time
+import ConfigParser
+
+conffile = '/etc/av4server.conf'
+
+def getyn(prompt,yes):
+	if yes:
+		yn = 'J'
+	else:
+		yn = 'N'
+		
+	prompt = "{:s} (J/N) [{:s}]: ".format(prompt,yn)
+	antw = raw_input(prompt)
+	if antw != '':
+		if antw == 'N' or antw == 'n':
+			yes = False
+		else:
+			yes = True
+	return yes
+	
+config = ConfigParser.RawConfigParser()
+config.read(conffile)
+
+try:
+	ServerName = config.get('av4server','name')
+except ConfigParser.NoOptionError:
+	ServerName = 'PI'
+	config.set('av4server','name',ServerName)
+
+DeviceName = config.get('av4server','device')
+LogDirectory = config.get('av4server','logdir')
+LogFilename = config.get('av4server','logfile')
+
+# Aktuelle Config einlesen
+try:
+	Timestamps = config.getboolean('av4server','timestamps')
+except ConfigParser.NoOptionError:
+	Timestamps = False
+try:
+	Compress = config.getboolean('av4server','compress')
+except ConfigParser.NoOptionError:
+	Compress = False
+try:
+	astoptime = config.getint('av4server','autostop')
+except ConfigParser.NoOptionError:
+	astoptime = 600
+try:
+	RawRecord = config.getboolean('av4server','rawrecord')
+except ConfigParser.NoOptionError:
+	RawRecord = False
+try:
+	Ukorr = config.getfloat('av4server','ukorr')
+except ConfigParser.NoOptionError:
+	Ukorr = 0.0
+
+# Werte abfragen
+
+# ServerName
+prompt = "Server Name [{:s}]: ".format(ServerName)
+antw = raw_input(prompt)
+if antw != '':
+	ServerName = antw
+	config.set('av4server','name',ServerName)
+
+# DeviceName
+prompt = "Serielles Device [{:s}]: ".format(DeviceName)
+antw = raw_input(prompt)
+if antw != '':
+	DeviceName = antw
+	config.set('av4server','device',DeviceName)
+
+# Log-Verzeichnis
+prompt = "Log-Verzeichnis [{:s}]: ".format(LogDirectory)
+antw = raw_input(prompt)
+if antw != '':
+	LogDirectory = antw
+	config.set('av4server','logdir',LogDirectory)
+
+# Log-Dateiname
+prompt = "Log-Dateiname [{:s}]: ".format(LogFilename)
+antw = raw_input(prompt)
+if antw != '':
+	LogFilename = antw
+	config.set('av4server','logfile',LogFilename)
+
+# Timestamps
+Timestamps = getyn("Zeitstempel in Logs erzeugen",Timestamps)
+config.set('av4server','timestamps',Timestamps)
+
+# Compress
+Compress = getyn("Komprimiert aufzeichnen",Compress)
+config.set('av4server','compress',Compress)
+
+# Roh-Aufzeichnung
+RawRecord = getyn("Daten roh aufzeichnen",RawRecord)
+config.set('av4server','rawrecord',RawRecord)
+
+# Autostop-Zeit
+prompt = "Autostop-Zeit in Sekunden [{:d}]: ".format(astoptime)
+antw = raw_input(prompt)
+if antw != '':
+	astoptime = int(antw)
+	config.set('av4server','autostop',astoptime)
+
+
+# Spannungskorrektur
+prompt = "Spannungskorrektur-Faktor [{:f}]: ".format(Ukorr)
+antw = raw_input(prompt)
+if antw != '':
+	Ukorr = float(antw)
+	if Ukorr == 0.0:
+		config.remove_option('av4server','ukorr')
+	else:
+		config.set('av4server','ukorr',Ukorr)
+
+save = getyn("Geänderte Einstellungen speichern?",False)
+if save:
+	f = open(conffile,'w')
+	config.write(f)

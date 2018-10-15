@@ -1,0 +1,14 @@
+#!/bin/sh
+
+beta="$1"
+
+wget -O /tmp/av4pack.tgz "http://av4ms.fahrner.name/media/download/av4pack${beta}.tgz"
+tar -C / -x -v -z --no-overwrite-dir -f /tmp/av4pack.tgz
+rm /tmp/av4pack.tgz
+rm -f /home/www/*.pyc
+if [ -r /tmp/postinst.sh ]; then
+	. /tmp/postinst.sh
+	rm -f /tmp/postinst.sh
+fi
+chown -R www-data:www-data /home/www
+echo "Bitte Raspberry PI jetzt neu booten"

@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AV4ms Zellen-Analyse</title>
+<link href="/static/style.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="/static/favicon2.png" type="image/x-icon" />
+</head>
+
+<body>
+	<div class="hilfe">
+		<h1>AV4ms Zellen-Analyse <small>v 1.5</small></h1>
+		<h2>Beschreibung der Werte</h2>
+		<table>
+			<tr><th colspan="2">Messwertanzeige</th></tr>
+			<tr>
+				<td>Spannung</td>
+				<td>Zellenspannung. Beim Entladen enthalten beide Spalten den gleichen Wert,
+					es wird mit Entladestrom gemessen. Beim Laden zeigt die Entladespalte die Spannung im stromlosen Zustand,
+					die Ladespalte zeigt jedoch die Spannung mit Ladestrom</td>
+			</tr>
+			<tr>
+				<td>&Oslash;&nbsp;Spannung</td>
+				<td>Durchschnittliche Zellenspannung über den jeweils letzten gesamten Lade- sowie Entladevorgang.
+					Beim Entladen wird diese Spannung unter Strom gemessen, beim Laden wird stromlos gemessen.
+					Eine gute Zelle hat beim Entladen &Oslash; ca. 1,23V</td>
+			</tr>
+			<tr>
+				<td>Strom</td>
+				<td>Lade-Strom entsprechend Schalterstellung S/M/L.
+					Der Entladestrom ist jeweils fest eingestellt für die AA bzw. AAA Zelle</td>
+			</tr>
+			<tr>
+				<td>Zeit</td>
+				<td>Aufsummierte letzte Zeitdauer während Laden bzw. Entladen</td>
+			</tr>
+			<tr>
+				<td>Nennkap.</td>
+				<td>Erforderliche Eingabe der Nennkapazität dieses Akkus.
+					Mittels des danebenliegenden Knopfes "setzen" kann diese eingegeben werden.
+					Sie ist Grundlage für die entsprechenden Berechnungen</td>
+			</tr>
+				<td>Kapazität</td>
+				<td>Die während des Entladens entnommene Menge an Strom in mAh,
+					bzw. während des Ladens eingeladene Strom-Menge</td>
+			<tr>
+				<td>Kapaz.rel.</td>
+				<td>Die relative Kapazität in Bezug auf die Nennkapazität (muss vorher eingetragen worden sein!)</td>
+			</tr>
+			<tr>
+				<td>Energie</td>
+				<td>Die während des Entladens entnommene Menge an Energie in mWh,
+					bzw. während des Ladens eingeladene Energie-Menge (Energie = Strom &times; Spannung &times; Zeitdauer)</td>
+			</tr>
+			<tr>
+				<td>Energ.rel.</td>
+				<td>Die relative Energie bezogen auf die Nennenergie &mdash; die Nennkapazität muss vorher gesetzt sein.
+					Die Nennenergie ergibt sich aus Nennkapazität &times; 1.23V (= mittlere Entladespannung eines guten Akkus)</td>
+			</tr>
+			<tr><th colspan="2">Analyse</th></tr>
+			<tr>
+				<td>Anzahl Zyklen</td>
+				<td>Anzahl der vollständig absolvierten Entlade-/Ladezyklen.
+					Die erste Entladung zählt hierbei nicht mit, da nicht davon ausgegangen werden kann,
+					dass der Akku zu Beginn voll geladen war</td>
+			</tr>
+			<tr>
+				<td>Ladeende &minus;&Delta;U</td>
+				<td>Zeigt an, ob das Laden mit einem Spannungsrückgang beendet wurde.
+					Falls Nein, deutet das auf einen schlechteren Akku oder auf einen zu geringen Ladestrom hin.
+					Der optimale Ladestrom liegt bei C/3 bis C/5 (1/3 bis 1/5 der Nennkapazität)</td>
+			</tr>
+			<tr>
+				<td>Spannungslage (E)</td>
+				<td>Prozentwert in Bezug auf die mittlere Entladespannung eines guten Akkus (1.23V).
+					Formel:	(&Oslash;U &minus; 1.0) &divide; 1.23</td>
+			</tr>
+			<tr>
+				<td>&Oslash; Spannung stromlos (L)</td>
+				<td>Durchschnittliche Spannung während des Ladens, stromlos gemessen</td>
+			</tr>
+			<tr>
+				<td>&Oslash; Spannung unter Strom (L)</td>
+				<td>Gemittelte Spannung während des Ladens, unter Ladestrom gemessen.
+					Je höher dieser Wert, umso größer ist der Innenwiderstand des Akkus und / oder seine Kontaktierungsgüte</td>
+			</tr>
+			<tr>
+				<td>relative Spannung (L)</td>
+				<td>Ladespannung unter Strom im Verhältnis zur stromlos gemessenen Ladespannung.
+					Je höher, umso größer ist der Innenwiderstand des Akkus.
+					Die Zellen-Kontaktierungs-Güte kann diesen Wert verschlechtern!</td>
+			</tr>
+			<tr>
+				<td>relative Spannung (E)</td>
+				<td>Durchschnittliche Entladespannung im Verhältnis zur durchschnittlichen Ladespannung (stromlos)</td>
+			</tr>
+			<tr>
+				<td>Nennkapazität</td>
+				<td>Die vom Benutzer eingegebene Nennkapazität des Akkus. Einige Berechnungen beruhen darauf.</td>
+			</tr>
+			<tr>
+				<td>Kapazität (E)</td>
+				<td>Die beim letzten Entladevorgang entnommene Strommenge in mAh</td>
+			</tr>
+			<tr>
+				<td>rel. Kapazität (E)</td>
+				<td>Entladekapazität im Verhältnis zur Nennkapazität</td>
+			</tr>
+			<tr>
+				<td>Kapazität (L)</td>
+				<td>Die während des letzten Ladens eingeladene Strommenge in mAh</td>
+			</tr>
+			<tr>
+				<td>rel. Kapazität (L)</td>
+				<td>Ladekapazität im Verhältnis zur Nennkapazität</td>
+			</tr>
+			<tr>
+				<td>Effizienz</td>
+				<td>Verhältnis von Entladekapazität zu Ladekapazität. Sagt aus, wieviel Kapazität entnommen werden konnte,
+					im Verhältnis zur zuletzt eingeladenen Kapazität.</td>
+			</tr>
+			<tr>
+				<td>Energie (E)</td>
+				<td>Entnommene Energie beim letzten Entladevorgang in mWh</td>
+			</tr>
+			<tr>
+				<td>rel. Energie (E)</td>
+				<td>Entladeenergie im Verhältnis zur Nennenergie (= Nennkapazität &times; 1.23V)</td>
+			</tr>
+			<tr>
+				<td>Energie (L)</td>
+				<td>Eingeladene Energie beim letzten Ladevorgang</td>
+			</tr>
+			<tr>
+				<td>rel. Energie (L)</td>
+				<td>Beim letzten Laden eingeladene Energie im Verhältnis zur Nennenergie</td>
+			</tr>
+			<tr>
+				<td>Energieeffizienz</td>
+				<td>Verhältnis von Entladeenergie zu Ladeenergie in %.
+					Sagt aus, wieviel Energie im Verhältnis zur eingeladenen Energie entnehmbar ist</td>
+			</tr>
+			<tr>
+				<td>Ri-Index (L)</td>
+				<td>Gibt an wie gut der Akku den Ladestrom annimmt.
+					Ein guter Akku erreicht hier 100%. Der Wert fliesst in die Beurteilung ein.</td>
+			</tr>
+			<tr>
+				<td>Spannung leer</td>
+				<td>Die Spannung am Ende der Erholungspause nach Entlade-Ende.
+					Der Wert sollte nur geringfügig über der Entladeschluss-Spannung von 1V liegen.
+					Höhere Werte deuten auf einen schlechten Akku hin.</td>
+			</tr>
+			<tr>
+				<td>Ri leer</td>
+				<td>Innenwiderstand des Akkus, gemessen bei Entlade-Ende.
+					Gute Mignonzellen liegen hier bei ca. 100 m&Omega;.
+					Je höher der Wert, umso schlechter der Akku.</td>
+			</tr>
+		</table>
+		
+		<h2>Beschreibung der Funktionen</h2>
+		<table>
+			<tr>
+				<td>Nennkapazität setzen</td>
+				<td>Im Eingabefeld <em>Nennkapazität</em> muss die Nennkapazität des Akkus je Schacht eingegeben werden.
+					Diese ist Grundlage für einige Berechnungen</td>
+			</tr>
+			<tr>
+				<td>Logging an/aus</td>
+				<td>Damit können die Messwerte des AV4ms in einer Datei gespeichert werden.
+					Diese Datei kann später mit dem <a href="http://www.nongnu.org/dataexplorer/">DataExplorer</a>
+					grafisch ausgewertet werden.
+					Den Dateinamen kann man im Feld <em>Logfile Dateiname</em> vorgeben.
+					Die Dateien befinden sich auf dem Raspberry PI im Verzeichnis AV4logs,
+					welches als Netzlaufwerk zur Verfügung steht</td>
+			</tr>
+			<tr>
+				<td>Autostop</td>
+				<td>Ist diese Option gesetzt, wird eine laufende Aufzeichnung 10 Minuten,
+					nachdem alle 4 Schächte voll geladen sind, automatisch beendet</td>
+			</tr>
+			<tr>
+				<td>Analyse</td>
+				<td>Hierüber kann eine erweiterte Auswertung abgerufen werden, nachdem das Laden beendet wurde.
+					Solange ein Akku noch nicht voll geladen ist, liefert diese Funktion keine Werte,
+					da diese nicht aussagefähig wären</td>
+			</tr>
+			<tr>
+				<td>Ausschalten</td>
+				<td>Mit diesem Knopf kann der Raspberry PI heruntergefahren werden.
+					Wichtig, bevor man den Raspberry PI vom Strom trennt.</td>
+			</tr>
+	</div>
+</body>
+</html>

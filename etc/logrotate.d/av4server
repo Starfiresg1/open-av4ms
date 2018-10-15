@@ -1,0 +1,16 @@
+/var/log/av4server/*.log {
+        weekly
+        missingok
+        rotate 12
+        compress
+	delaycompress
+        notifempty
+        sharedscripts
+        postrotate
+             if [ -x /usr/sbin/invoke-rc.d ]; then \
+                invoke-rc.d av4server reopen-logs > /dev/null 2>&1; \
+             else \
+                /etc/init.d/av4server reopen-logs > /dev/null 2>&1; \
+             fi; \
+        endscript
+}

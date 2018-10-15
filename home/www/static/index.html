@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AV4ms Zellen-Inspektor</title>
+<link href="/static/style.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="/static/favicon2.png" type="image/x-icon" />
+<script language="JavaScript">
+	var av4version = " ";
+</script>
+<script language="JavaScript" src="/static/av4vers.js"></script>
+<script language="JavaScript" src="/static/messwerte.js"></script>
+<script language="JavaScript">
+	function oeffnefenster (url) {
+		fenster = window.open(url, "AV4ms", "width=1200,height=780,scrollbars=yes,resizable=yes");
+		fenster.focus();
+	}
+</script>
+</head>
+
+<body>
+	<div id="inner">
+		<h1>AV4ms Zellen-Inspektor</h1>
+		<table id="table_inner">
+			<tr>
+				<td>
+					<fieldset id="zelle1">
+						<legend>Zelle 1</legend>
+						<table>
+							<tr>
+								<font>Logbuch von Zelle 1:</font>
+								<br />
+								<textarea class="output" id="l1" readonly></textarea>
+							</tr>
+							<tr>
+								<font>Zustand von Zelle 1:</font>
+								<br />
+								<textarea class="output_small" id="s1txt" readonly></textarea>                            	
+							</tr>
+							<tr>
+								<td><div id="cy1div">Zyklus <label id="cy1"></label></div></td>
+								<td><div id="hd1ediv">Entladen</div></td>
+								<td><div id="hd1ldiv">Laden</div></td>
+							</tr>
+							<tr>
+								<td>Spannung</td>
+								<td><input class="output_smallest" id="u1e" readonly /></td>
+                                <td><input class="output_smallest" id="u1l" readonly /></td>
+							</tr>
+							<tr>
+								<td>&oslash; Spanng.</td>
+								<td><input class="output_smallest" id="u1eavg" readonly /></td>
+								<td><input class="output_smallest" id="u1lavg" readonly /></td>
+							</tr>
+							<tr>
+								<td>Strom</td>
+								<td><input class="output_smallest" id="i1e" readonly /></td>
+                                <td><input class="output_smallest" id="i1l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Zeit</td>
+								<td><input class="output_smallest" id="t1e" readonly /></td>
+								<td><input class="output_smallest" id="t1l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Nennkap.</td>
+								<td><input class="output_smallest" id="cnenn1" /></td>
+								<td><center style="padding-top:2px;"><button onClick="setnenn(1)">setzen</button></center></td>
+							</tr>
+							<tr>
+								<td>Kapazität</td>
+								<td><input class="output_smallest" id="c1e" readonly /></td>
+								<td><input class="output_smallest" id="c1l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Kapaz.rel.</td>
+								<td><input class="output_smallest" id="c1erate" readonly /></td>
+								<td><input class="output_smallest" id="c1lrate"readonly /></td>
+							</tr>
+							<tr>
+								<td>Energie</td>
+								<td><input class="output_smallest" id="e1e" readonly /></td>
+								<td><input class="output_smallest" id="e1l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Energ.rel.</td>
+								<td><input class="output_smallest" id="e1erate" readonly /></td>
+								<td><input class="output_smallest" id="e1lrate" readonly /></td>
+							</tr>
+						</table>
+					</fieldset>
+				</td>
+
+				<td>
+					<fieldset id="zelle2">
+						<legend>Zelle 2</legend>
+						<table>
+							<tr>
+								<font>Logbuch von Zelle 2:</font>
+								<br />
+								<textarea class="output" id="l2" readonly></textarea>
+							</tr>
+							<tr>
+								<font>Zustand von Zelle 2:</font>
+								<br />
+								<textarea class="output_small" id="s2txt" readonly></textarea>                            	
+							</tr>
+							<tr>
+								<td><div id="cy2div">Zyklus <label id="cy2"></label></div></td>
+								<td><div id="hd2ediv">Entladen</div></td>
+								<td><div id="hd2ldiv">Laden</div></td>
+							</tr>
+							<tr>
+								<td>Spannung</td>
+								<td><input class="output_smallest" id="u2e" readonly /></td>
+								<td><input class="output_smallest" id="u2l" readonly /></td>
+							</tr>
+							<tr>
+								<td>&oslash; Spanng.</td>
+								<td><input class="output_smallest" id="u2eavg" readonly /></td>
+								<td><input class="output_smallest" id="u2lavg" readonly /></td>
+							</tr>
+							<tr>
+								<td>Strom</td>
+								<td><input class="output_smallest" id="i2e" readonly /></td>
+								<td><input class="output_smallest" id="i2l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Zeit</td>
+								<td><input class="output_smallest" id="t2e" readonly /></td>
+								<td><input class="output_smallest" id="t2l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Nennkap.</td>
+								<td><input class="output_smallest" id="cnenn2" /></td>
+								<td><center style="padding-top:2px;"><button onClick="setnenn(2)">setzen</button></center></td>
+							</tr>
+							<tr>
+								<td>Kapazität</td>
+								<td><input class="output_smallest" id="c2e" readonly /></td>
+								<td><input class="output_smallest" id="c2l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Kapaz.rel.</td>
+								<td><input class="output_smallest" id="c2erate" readonly /></td>
+								<td><input class="output_smallest" id="c2lrate" readonly /></td>
+							</tr>
+							<tr>
+								<td>Energie</td>
+								<td><input class="output_smallest" id="e2e" readonly /></td>
+								<td><input class="output_smallest" id="e2l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Energ.rel.</td>
+								<td><input class="output_smallest" id="e2erate" readonly /></td>
+								<td><input class="output_smallest" id="e2lrate" readonly /></td>
+							</tr>
+						</table>
+					</fieldset>
+				</td>
+				
+				<td>
+					<fieldset id="zelle3">
+						<legend>Zelle 3</legend>
+						<table>
+							<tr>
+								<font>Logbuch von Zelle 3:</font>
+								<br />
+								<textarea class="output" id="l3" readonly></textarea>
+							</tr>
+							<tr>
+								<font>Zustand von Zelle 3:</font>
+								<br />
+								<textarea class="output_small" id="s3txt" readonly></textarea>
+							</tr>
+							<tr>
+								<td><div id="cy3div">Zyklus <label id="cy3"></label></div></td>
+								<td><div id="hd3ediv">Entladen</div></td>
+								<td><div id="hd3ldiv">Laden</div></td>
+							</tr>
+							<tr>
+								<td>Spannung</td>
+								<td><input class="output_smallest" id="u3e" readonly /></td>
+								<td><input class="output_smallest" id="u3l" readonly /></td>
+							</tr>
+							<tr>
+								<td>&oslash; Spanng.</td>
+								<td><input class="output_smallest" id="u3eavg" readonly /></td>
+								<td><input class="output_smallest" id="u3lavg" readonly /></td>
+							</tr>
+							<tr>
+								<td>Strom</td>
+								<td><input class="output_smallest" id="i3e" readonly /></td>
+								<td><input class="output_smallest" id="i3l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Zeit</td>
+								<td><input class="output_smallest" id="t3e" readonly /></td>
+								<td><input class="output_smallest" id="t3l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Nennkap.</td>
+								<td><input class="output_smallest" id="cnenn3" /></td>
+								<td><center style="padding-top:2px;"><button onClick="setnenn(3)">setzen</button></center></td>
+							</tr>
+							<tr>
+								<td>Kapazität</td>
+								<td><input class="output_smallest" id="c3e"readonly /></td>
+								<td><input class="output_smallest" id="c3l"readonly /></td>
+							</tr>
+							<tr>
+								<td>Kapaz.rel.</td>
+								<td><input class="output_smallest" id="c3erate" readonly /></td>
+								<td><input class="output_smallest" id="c3lrate" readonly /></td>
+							</tr>
+							<tr>
+								<td>Energie</td>
+								<td><input class="output_smallest" id="e3e" readonly /></td>
+								<td><input class="output_smallest" id="e3l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Energ.rel.</td>
+								<td><input class="output_smallest" id="e3erate" readonly /></td>
+								<td><input class="output_smallest" id="e3lrate" readonly /></td>
+							</tr>
+						</table>
+					</fieldset>
+				</td>
+				
+				<td>
+					<fieldset id="zelle4">
+						<legend>Zelle 4</legend>
+						<table>
+							<tr>
+								<font>Logbuch von Zelle 4:</font>
+								<br />
+								<textarea class="output" id="l4"readonly></textarea>
+							</tr>
+							<tr>
+								<font>Zustand von Zelle 4:</font>
+								<br />
+								<textarea class="output_small" id="s4txt" readonly></textarea>
+							</tr>
+							<tr>
+								<td><div id="cy4div">Zyklus <label id="cy4"></label></div></td>
+								<td><div id="hd4ediv">Entladen</div></td>
+								<td><div id="hd4ldiv">Laden</div></td>
+							</tr>
+							<tr>
+								<td>Spannung</td>
+								<td><input class="output_smallest" id="u4e" readonly /></td>
+								<td><input class="output_smallest" id="u4l" readonly /></td>
+							</tr>
+							<tr>
+								<td>&oslash; Spanng.</td>
+								<td><input class="output_smallest" id="u4eavg" readonly /></td>
+								<td><input class="output_smallest" id="u4lavg" readonly /></td>
+							</tr>
+							<tr>
+								<td>Strom</td>
+								<td><input class="output_smallest" id="i4e" readonly /></td>
+								<td><input class="output_smallest" id="i4l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Zeit</td>
+								<td><input class="output_smallest" id="t4e" readonly /></td>
+								<td><input class="output_smallest" id="t4l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Nennkap.</td>
+								<td><input class="output_smallest" id="cnenn4" /></td>
+								<td><center style="padding-top:2px;"><button onClick="setnenn(4)">setzen</button></center></td>
+							</tr>
+							<tr>
+								<td>Kapazität</td>
+								<td><input class="output_smallest" id="c4e"readonly /></td>
+								<td><input class="output_smallest" id="c4l"readonly /></td>
+							</tr>
+							<tr>
+								<td>Kapaz.rel.</td>
+								<td><input class="output_smallest" id="c4erate" readonly /></td>
+								<td><input class="output_smallest" id="c4lrate" readonly /></td>
+							</tr>
+							<tr>
+								<td>Energie</td>
+								<td><input class="output_smallest" id="e4e" readonly /></td>
+								<td><input class="output_smallest" id="e4l" readonly /></td>
+							</tr>
+							<tr>
+								<td>Energ.rel.</td>
+								<td><input class="output_smallest" id="e4erate" readonly /></td>
+								<td><input class="output_smallest" id="e4lrate" readonly /></td>
+							</tr>
+						</table>
+					</fieldset>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<fieldset>
+						<legend>Logoptionen</legend>
+						<label>Logging:</label>
+						<br />
+						<input type="radio" id="ran" name="logstate" onclick="enablelog()"/>
+						<label for="ran"><span></span>an</label>
+						<input type="radio" id="raus" name="logstate" onclick="disablelog()"/>
+						<label for="raus"><span></span>aus</label>
+						<br />
+						<label>Autostop</label>
+						<br />
+						<input id="autostopan" type="radio" name="autostop" onclick="enableautostop()"/>
+						<label for="autostopan" title="Logging wird automatisch deaktiviert wenn alle Zellen geladen.">an</label>
+						<input id="autostopaus" type="radio" name="autostop" onclick="disableautostop()"/>
+						<label for="autostopaus">aus</label>
+						<br />
+						<label for="logname">Logfile Dateiname:</label>
+						<br />
+						<input id="logname" title=".csv wird als Endung empfohlen"/>
+					</fieldset>
+				</td>
+				
+				<td colspan="2">
+					<p class = "copy">Aktuelle Zeit: <input id="clock"/></p>
+					<p id="update_alert" class = "copy"></p>
+					<p class = "copy">&copy; Joachim & Tim Fahrner 2014</p>
+				</td>
+				
+				<td colspan="1">
+					<fieldset>
+						<legend>Funktionen</legend>
+						<button onclick="oeffnefenster('/analyse')">Analyse</button> 
+						<button onclick="oeffnefenster('/static/hilfe.html')">Hilfe</button> 
+						<button onclick="shutdown()">Ausschalten</button>
+					</fieldset>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script language="JavaScript">run();</script>
+</body>
+</html>
