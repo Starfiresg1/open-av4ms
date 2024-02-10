@@ -1,0 +1,10 @@
+FROM python:2.7.18
+WORKDIR /usr/src/av4ms
+COPY av4ms_1.5-1.deb ./
+RUN apt-get update && apt-get upgrade -y
+RUN apt install -y locales
+RUN update-locale
+RUN apt install -y ./av4ms_1.5-1.deb
+EXPOSE 80
+COPY startup.sh ./
+CMD ./startup.sh
